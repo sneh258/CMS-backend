@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
         static associate(models) {
             // define association here
-            Collection.hasOne(models.ContentType, {
+            Collection.hasOne(models.RecordType, {
                 foreignKey: 'collection_id',
             });
             Collection.hasMany(models.Content, { foreignKey: 'collection_id' });
