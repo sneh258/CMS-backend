@@ -11,7 +11,8 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             values: {
-                type: Sequelize.JSON
+                type: Sequelize.JSON,
+                defaultValue:{}
             },
             record_type_id: {
                 type: Sequelize.INTEGER

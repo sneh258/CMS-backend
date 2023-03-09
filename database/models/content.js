@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
         static associate(models) {
             // define association here
-            Content.belongsTo(models.ContentType, {
+            Content.belongsTo(models.RecordType, {
                 foreignKey: 'record_type_id',
             });
             Content.belongsTo(models.Collection, {
