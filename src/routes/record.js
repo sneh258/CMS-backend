@@ -3,12 +3,12 @@ const router = express.Router();
 
 const recordController   = require('./../controllers/record');
 
-router.route('/save').post(recordController.createRecordType);
+router.route('/create').post(recordController.createRecordType);
 
-router.route('/update').post(recordController.updateRecordType);
+router.route('/update').patch(recordController.updateRecordType);
 
 router
-    .route('/field')
+    .route('/column')
     .post(recordController.addColumn)
     .patch(recordController.editColumnName)
     .delete(recordController.deleteRecordColumn);

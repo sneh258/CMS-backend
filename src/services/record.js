@@ -38,19 +38,18 @@ const deleteRecordColumn= async (id,field_name) => {
     return { message: 'Field has been deleted' };
 };
 
-const addColumn = async (id, field_name, field_type) => {
+const addColumn = async (id, field_name) => {
     const recordType = await db.RecordType.findOne({ where: { id } });
-    const newFieldData = { ...recordType.field };
-    newFieldData[field_name] = field_type;
-    await db.RecordType.update({ field: newFieldData }, { where: { id } });
+    const newFieldData = { ...recordType.fields };
+    await db.RecordType.update({ fields: newFieldData }, { where: { id } });
     const record = await db.Content.findAll({
         where: { record_type_id: recordType.id },
     });
     await Promise.all(
         record.map((data) => {
-            const newValue = { ...data.value };
+            const newValue = { ...data.values };
             newValue[field_name] = null;
-            db.Content.update({ value: newValue }, { where: { id: data.id } });
+            db.Content.update({ values: newValue }, { where: { id: data.id } });
         })
     );
     return { message: 'Field has been added' };

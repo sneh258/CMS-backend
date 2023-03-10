@@ -58,11 +58,10 @@ const deleteRecordColumn = async (req, res) => {
 
 const addColumn = async (req, res) => {
     try {
-        const { id, field_name, field_type } = req.body;
+        const { id, field_name } = req.body;
         const updatedContentType = await recordServices.addColumn(
             id,
             field_name,
-            field_type
         );
         res.status(200).json({
             data: updatedContentType,
