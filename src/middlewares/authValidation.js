@@ -7,18 +7,19 @@ const validate = async (req, res, next) => {
     }
     try {
         const userData = await axios({
-            baseURL: 'http://localhost:4000',
-            url: '/token/validate',
+            baseURL: 'http://localhost:5000',
+            url: 'user/token/validate',
             method: 'get',
             headers: {
                 Authorization: token,
             },
         });
         req.id = userData.data.id;
+        next();
     } catch (err) {
         res.json({ message: 'authentication issue' });
     }
-    next();
+    
 };
 
 module.exports = { validate };

@@ -1,19 +1,20 @@
 const express = require('express');
 const router = express.Router();
 
-const recordController   = require('./../controllers/record');
+const recordController = require('./../controllers/record');
+const validation = require('./../middlewares/authValidation');
 
-router.route('/create').post(recordController.createRecordType);
+router.route('/create').post(validation.validate,recordController.createRecordType);
 
-router.route('/update').patch(recordController.updateRecordType);
+router.route('/update').patch(validation.validate,recordController.updateRecordType);
 
 router
     .route('/column')
-    .post(recordController.addColumn)
-    .patch(recordController.editColumnName)
-    .delete(recordController.deleteRecordColumn);
+    .post(validation.validate,recordController.addColumn)
+    .patch(validation.validate,recordController.editColumnName)
+    .delete(validation.validate,recordController.deleteRecordColumn);
 
 router.route('/details')
-    .get(recordController.listRecords);
+    .get(validation.validate,recordController.listRecords);
 
 module.exports = router;

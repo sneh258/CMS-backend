@@ -1,7 +1,7 @@
 const db = require('../../database/models');
 const recordService = require('../../src/services/record');
 
-describe('Testing Record Controller', () => {
+describe('Testing Record Services', () => {
     it('should return a list of the records', async() => {
         jest.spyOn(db.RecordType, 'findAll').mockResolvedValue({
             id: 1,
