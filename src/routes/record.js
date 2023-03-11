@@ -4,7 +4,7 @@ const router = express.Router();
 const recordController = require('./../controllers/record');
 const validation = require('./../middlewares/authValidation');
 
-router.route('/create').post(validation.validate,recordController.createRecordType);
+router.route('/create').post(recordController.createRecordType);
 
 router.route('/update').patch(validation.validate,recordController.updateRecordType);
 
