@@ -30,9 +30,9 @@ const deleteRecordColumn= async (id,field_name) => {
     });
     await Promise.all(
         allContent.map((data) => {
-            const newData = { ...data.value };
+            const newData = { ...data.values };
             delete newData[field_name];
-            db.Content.update({ value: newData }, { where: { id: data.id } });
+            db.Content.update({ values: newData }, { where: { id: data.id } });
         })
     );
     return { message: 'Field has been deleted' };
@@ -40,7 +40,7 @@ const deleteRecordColumn= async (id,field_name) => {
 
 const addColumn = async (id, field_name) => {
     const recordType = await db.RecordType.findOne({ where: { id } });
-    const newFieldData = { ...recordType.fields };
+    const newFieldData = { ...recordType.fields,field_name };
     await db.RecordType.update({ fields: newFieldData }, { where: { id } });
     const record = await db.Content.findAll({
         where: { record_type_id: recordType.id },
@@ -69,7 +69,7 @@ const editColumnName = async (id, field_name, new_field_name) => {
             const newDataValue = { ...data.values };
             newDataValue[new_field_name] = newDataValue[field_name];
             delete newDataValue[field_name];
-            db.Content.update({ value: newDataValue }, { where: { id: data.id } });
+            db.Content.update({ values: newDataValue }, { where: { id: data.id } });
         })
     );
     return { message: 'column name has been edited' };

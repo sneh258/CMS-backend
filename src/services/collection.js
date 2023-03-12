@@ -1,5 +1,5 @@
 const db = require('./../../database/models');
-
+//add data to collection(add row)
 const addRecord = async (collection_id, record) => {
     const collection = await db.Collection.findOne({ where: { id: collection_id }, include: db.RecordType });
     if (!collection)
@@ -42,11 +42,14 @@ const deleteRecord = async (collection_id, record_id) => {
 };
 
 const getDataOfCollection = async (collection_id) => {
-    const collection = await db.Collection.findOne({ where: { id: collection_id }, include: db.Content });
+    // const collection = await db.Collection.findOne({ where: { id: collection_id }, include: db.Content });
+    const collection = await db.Content.findAll({ where: { collection_id: collection_id } });
     if (!collection) {
         throw new Error('Collection has not been found');
     }
-    return collection.Contents;
+    // console.log(collection.Contents);
+    // return collection.Contents;
+    return collection;
 };
 
 module.exports = { listCollections,addRecord ,editRecord,deleteRecord,getDataOfCollection};
