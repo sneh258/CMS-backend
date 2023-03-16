@@ -73,6 +73,20 @@ const addColumn = async (req, res) => {
     }
 };
 
+const listRecordById = async (req, res) => {
+    try {
+        const { collection_id } = req.body;
+        const recordType = await recordServices.listRecordById(collection_id);
+        res.status(200).json({
+            data: recordType,
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: error.message,
+        });
+    }
+};
+
 const editColumnName = async (req, res) => {
     try {
         const { id, field_name, new_field_name } = req.body;
@@ -96,6 +110,7 @@ module.exports = {
     updateRecordType,
     deleteRecordColumn,
     addColumn,
+    listRecordById,
     editColumnName,
     listRecords,
 };

@@ -49,7 +49,8 @@ describe('Testing Record Services', () => {
         const result = await recordService.updateRecordType(1, 'abc_company');
         expect(result).toEqual({ message: 'Record has been Updated' });
     });
-    it('should delete a column of Record Type', async () => {
+
+    it('should delete a column of record Type', async () => {
         jest.spyOn(db.RecordType, 'findOne').mockResolvedValue({
             id: 1,
             collection_id: 1,
@@ -61,10 +62,15 @@ describe('Testing Record Services', () => {
         jest.spyOn(db.RecordType, 'update').mockResolvedValue();
         jest.spyOn(db.Content, 'findAll').mockResolvedValue(['1', '2']);
         jest.spyOn(Promise, 'all').mockResolvedValue();
-        const result = await recordService.deleteRecordColumn(1, 'abc_company');
+        jest.spyOn(db.Content, 'update').mockResolvedValue();
+        const result = await recordService.deleteRecordColumn(
+            1,
+            'abc_company'
+        );
         expect(result).toEqual({ message: 'Field has been deleted' });
     });
-    it('should edit column Name of Record Type', async () => {
+
+    it('should edit a column Name of record Type', async () => {
         jest.spyOn(db.RecordType, 'findOne').mockResolvedValue({
             id: 1,
             collection_id: 1,
@@ -83,5 +89,4 @@ describe('Testing Record Services', () => {
         );
         expect(result).toEqual({ message: 'column name has been edited' });
     });
-
 });

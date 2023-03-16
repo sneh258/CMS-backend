@@ -54,7 +54,15 @@ const addColumn = async (id, field_name) => {
     );
     return { message: 'Field has been added' };
 };
-
+const listRecordById= async (id) => {
+    const response = await db.RecordType.findOne({
+        where: {
+            collection_id: id,
+        },
+    });
+    console.log(response);
+    return response;
+};
 const editColumnName = async (id, field_name, new_field_name) => {
     const recordType = await db.RecordType.findOne({ where: { id } });
     const newFieldData = { ...recordType.field };
@@ -74,4 +82,4 @@ const editColumnName = async (id, field_name, new_field_name) => {
     );
     return { message: 'column name has been edited' };
 };
-module.exports = { listRecords,createRecordType ,updateRecordType,deleteRecordColumn,addColumn,editColumnName};
+module.exports = { listRecords,createRecordType ,updateRecordType,deleteRecordColumn,addColumn,listRecordById,editColumnName};

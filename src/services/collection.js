@@ -38,7 +38,7 @@ const deleteRecord = async (collection_id, record_id) => {
         throw new Error('Collection has not been found');
     }
     await db.Content.destroy({where:{id:record_id}});
-    return { message: 'Updated!!!' };
+    return { message: 'Deleted!!!' };
 };
 
 const getDataOfCollection = async (collection_id) => {
